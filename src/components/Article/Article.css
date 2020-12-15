@@ -1,0 +1,37 @@
+.article {
+  color: blue;
+  padding-bottom: 5px;
+}
+.article-container {
+  max-width: 798px;
+  margin: auto;
+}
+.article-body {
+  max-width: 680px;
+}
+
+.subheadline1 {
+  font-weight: bold;
+}
+.meta-info {
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 12px 0 9px;
+}
+.meta-info-author {
+  font-size: 14px;
+  font-weight: bold;
+  color: #6d7573;
+  text-transform: uppercase;
+  margin: 0;
+}
+.meta-info-date {
+  font-size: 0.75rem;
+  color: #999999;
+  margin: 0;
+}
+.article-preamble {
+  font-size: 24px;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+}
