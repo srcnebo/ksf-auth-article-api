@@ -2,8 +2,5 @@
 
 clone the project
 
-Run
-
-````yarn install
-    yarn start```
-````
+Run `yarn install`
+Run `yarn start`
