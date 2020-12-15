@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './Login.css';
 
 async function loginUser(username, password) {
-  axios
+  const token = await axios
     .post(
       'https://persona.api.ksfmedia.fi/v1/login',
       { username, password },
@@ -16,21 +16,25 @@ async function loginUser(username, password) {
     )
     .then((res) => {
       const userToken = res.data;
+      console.log('userTOKEN', res);
       sessionStorage.setItem('token', JSON.stringify(userToken));
+      // return userToken;
     })
     .catch((err) => {
       console.log(err.response);
     });
+  return await token;
 }
 
-function Login() {
+function Login({ getData, currentArticleId }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    loginUser(username, password);
-    // setToken(token);
+
+    const token = await loginUser(username, password);
+    getData(currentArticleId, token);
   };
 
   return (
