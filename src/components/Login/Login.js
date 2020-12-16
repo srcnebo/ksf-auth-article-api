@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import './Login.css';
@@ -16,12 +16,11 @@ async function loginUser(username, password) {
     )
     .then((res) => {
       const userToken = res.data;
-      console.log('userTOKEN', res);
       sessionStorage.setItem('token', JSON.stringify(userToken));
       // return userToken;
     })
     .catch((err) => {
-      console.log(err.response);
+      console.log(err);
     });
   return await token;
 }
@@ -78,6 +77,9 @@ function Login({ getData, currentArticleId }) {
   );
 }
 
-Login.propTypes = {};
+Login.propTypes = {
+  getData: PropTypes.object,
+  currentArticleId: PropTypes.string,
+};
 
 export default Login;

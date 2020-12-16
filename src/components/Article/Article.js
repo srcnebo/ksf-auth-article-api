@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import Image from '../Image/Image';
 import Login from '../Login/Login';
@@ -106,9 +105,5 @@ function Article() {
     </>
   );
 }
-
-Article.propTypes = {
-  // children: PropTypes.element.isRequired
-};
 
 export default Article;

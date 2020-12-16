@@ -7,7 +7,6 @@ function Image(props) {
   const fallbackImage =
     'https://via.placeholder.com/680x400.png?text=Placeholder:+image+is+missing!';
 
-  // const textAlign = type === 'main' ? 'text-align:left' : 'text-align:center';
   const captionClasses =
     type === 'main' ? 'image-text-spacing align-main' : 'image-text-spacing';
   return (
@@ -27,6 +26,11 @@ function Image(props) {
   );
 }
 
-Image.propTypes = {};
+Image.propTypes = {
+  caption: PropTypes.string,
+  url: PropTypes.string,
+  byline: PropTypes.string,
+  type: PropTypes.string,
+};
 
 export default Image;

@@ -29,6 +29,10 @@ function Metadata(props) {
   );
 }
 
-Metadata.propTypes = {};
+Metadata.propTypes = {
+  authors: PropTypes.array,
+  publishingTime: PropTypes.string,
+  updateTime: PropTypes.string,
+};
 
 export default Metadata;

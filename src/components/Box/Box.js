@@ -40,6 +40,10 @@ function Box(props) {
   );
 }
 
-Box.propTypes = {};
+Box.propTypes = {
+  content: PropTypes.arrayOf(PropTypes.string),
+  title: PropTypes.string,
+  headline: PropTypes.string,
+};
 
 export default Box;

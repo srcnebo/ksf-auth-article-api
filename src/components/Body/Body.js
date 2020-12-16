@@ -38,6 +38,15 @@ function Body({ body }) {
   );
 }
 
-Body.propTypes = {};
+Body.propTypes = {
+  body: PropTypes.arrayOf(
+    PropTypes.shape({
+      html: PropTypes.string,
+      headline: PropTypes.string,
+      image: PropTypes.objectOf(PropTypes.string),
+      box: PropTypes.object,
+    })
+  ),
+};
 
 export default Body;
