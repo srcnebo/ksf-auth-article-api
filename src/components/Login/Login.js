@@ -38,24 +38,40 @@ function Login({ getData, currentArticleId }) {
   };
 
   return (
-    <div className='login-wrapper'>
-      <h1>Please Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <p>Username</p>
-          <input type='text' onChange={(e) => setUserName(e.target.value)} />
-        </label>
-        <label>
-          <p>Password</p>
-          <input
-            type='password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <div>
-          <button type='submit'>Submit</button>
-        </div>
-      </form>
+    <div className='login-box-container'>
+      <h1>
+        Läs HBL digitalt för{' '}
+        <span className='header1-underline'>endast 1€</span>
+      </h1>
+      <div class='login-text'>
+        Redan prenumerant?
+        <span class='login-link'>Logga in för att fortsätta läsa</span>
+      </div>
+      <div className='login-wrapper'>
+        <form onSubmit={handleSubmit}>
+          <label className='ksf-label'>
+            <p>Username</p>
+            <input
+              type='text'
+              onChange={(e) => setUserName(e.target.value)}
+              className='ksf-input'
+            />
+          </label>
+          <label className='ksf-label'>
+            <p>Password</p>
+            <input
+              type='password'
+              onChange={(e) => setPassword(e.target.value)}
+              className='ksf-input'
+            />
+          </label>
+          <div>
+            <button type='submit' className='ksf-login-button'>
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

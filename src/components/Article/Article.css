@@ -103,6 +103,7 @@
   .article-preamble {
     font-size: 1.25rem;
     margin: 20px 0;
+    padding: 0;
   }
 }
 @media (min-width: 769px) {
