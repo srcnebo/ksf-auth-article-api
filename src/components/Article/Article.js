@@ -4,25 +4,12 @@ import axios from 'axios';
 import Image from '../Image/Image';
 import Login from '../Login/Login';
 import Body from '../Body/Body';
+import Metadata from '../Metadata/Metadata';
 import './Article.css';
 
 const articleTest = {
   premium: 'dede0629-79d6-456e-ab0a-dfbf9e836763',
   free: 'a6282b95-e620-4040-87d1-731fed85a7d6',
-};
-
-const cleanDate = function (updateTime, publishingTime) {
-  const options = {
-    hour: '2-digit',
-    minute: '2-digit',
-  };
-  const date1 = new Date(publishingTime)
-    .toLocaleDateString('fi-FI', options)
-    .replace('klo', '');
-  const date2 = new Date(updateTime)
-    .toLocaleDateString('fi-FI', options)
-    .replace('klo', '');
-  return `${date1} UPPDATERAD ${date2}`;
 };
 
 const getToken = function () {
@@ -100,15 +87,11 @@ function Article() {
               caption={data.mainImage.caption}
               type='main'
             />
-            {/* Todo: Meta could be refactored into separate component */}
-            <div className='meta-info-container'>
-              {data.authors.map((author) => (
-                <p className='meta-info-author'>{author.byline}</p>
-              ))}
-              <p className='meta-info-date'>
-                {cleanDate(data.publishingTime, data.updateTime)}
-              </p>
-            </div>
+            <Metadata
+              authors={data.authors}
+              publishingTime={data.publishingTime}
+              updateTime={data.updateTime}
+            />
             <div
               dangerouslySetInnerHTML={{ __html: data.preamble }}
               className='article-preamble'
@@ -124,6 +107,8 @@ function Article() {
   );
 }
 
-Article.propTypes = {};
+Article.propTypes = {
+  // children: PropTypes.element.isRequired
+};
 
 export default Article;

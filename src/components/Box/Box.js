@@ -23,8 +23,11 @@ function Box(props) {
         <div dangerouslySetInnerHTML={{ __html: `<h3>${title}</h3>` }} />
       </div>
       <div className='box-body-container'>
-        {content.map((paragraph) => (
-          <div dangerouslySetInnerHTML={{ __html: `<p>${paragraph}</p>` }} />
+        {content.map((paragraph, index) => (
+          <div
+            key={`box-content-p-${index}`}
+            dangerouslySetInnerHTML={{ __html: `<p>${paragraph}</p>` }}
+          />
         ))}
       </div>
       <div className={collapserContainerClasses}>

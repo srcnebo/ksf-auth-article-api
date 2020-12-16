@@ -7,8 +7,10 @@ import './Body.css';
 function Body({ body }) {
   return (
     <div className='article-body'>
-      {body.map((item) => (
-        <div className='article-body-paragraph'>
+      {body.map((item, index) => (
+        <div
+          key={`body-paragraphs-${index}`}
+          className='article-body-paragraph'>
           {Object.keys(item)[0] === 'headline' ? (
             <div
               dangerouslySetInnerHTML={{ __html: item.headline }}

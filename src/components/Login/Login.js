@@ -43,10 +43,12 @@ function Login({ getData, currentArticleId }) {
         Läs HBL digitalt för{' '}
         <span className='header1-underline'>endast 1€</span>
       </h1>
+
       <div class='login-text'>
         Redan prenumerant?
         <span class='login-link'>Logga in för att fortsätta läsa</span>
       </div>
+
       <div className='login-wrapper'>
         <form onSubmit={handleSubmit}>
           <label className='ksf-label'>
