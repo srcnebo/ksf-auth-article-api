@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Image from '../Image/Image';
-import Box from '../Box/Box';
 import Login from '../Login/Login';
+import Body from '../Body/Body';
 import './Article.css';
 
 const articleTest = {
@@ -65,12 +65,12 @@ function Article() {
     <>
       <div className='testing-preheader'>
         <button
-          className='ksf-button'
+          className='ksf-button test-button'
           onClick={() => setCurrentArticleId(articleTest.premium)}>
           Load Premium Article
         </button>
         <button
-          className='ksf-button'
+          className='ksf-button test-button'
           onClick={() => setCurrentArticleId(articleTest.free)}>
           Load Free Article
         </button>
@@ -78,7 +78,7 @@ function Article() {
       {data && (
         <div className='article-container'>
           <div>
-            <header>
+            <header className='text-padding'>
               <ul className='article-tag-list'>
                 <li>
                   <a
@@ -98,9 +98,10 @@ function Article() {
               url={data.mainImage.url}
               byline={data.mainImage.byline}
               caption={data.mainImage.caption}
+              type='main'
             />
             {/* Todo: Meta could be refactored into separate component */}
-            <div className='meta-info'>
+            <div className='meta-info-container'>
               {data.authors.map((author) => (
                 <p className='meta-info-author'>{author.byline}</p>
               ))}
@@ -113,32 +114,7 @@ function Article() {
               className='article-preamble'
             />
           </div>
-          <div className='article-body'>
-            {data.body.map((item) => (
-              <div>
-                {Object.keys(item)[0] === 'headline' ? (
-                  <div
-                    dangerouslySetInnerHTML={{ __html: item.headline }}
-                    className='subheadline1'
-                  />
-                ) : Object.keys(item)[0] === 'html' ? (
-                  <div dangerouslySetInnerHTML={{ __html: item.html }} />
-                ) : Object.keys(item)[0] === 'image' ? (
-                  <Image
-                    url={item.image.url}
-                    caption={item.image.caption}
-                    byline={item.image.byline}
-                  />
-                ) : (
-                  <Box
-                    content={item.box.content}
-                    title={item.box.title}
-                    headline={item.box.headline}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
+          <Body body={data.body} />
           {data.premium && !getToken() && (
             <Login getData={getData} currentArticleId={currentArticleId} />
           )}

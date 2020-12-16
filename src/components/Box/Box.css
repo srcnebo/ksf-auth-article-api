@@ -1,6 +1,28 @@
 .box-container {
-  border: 1px solid #4b4b4b;
-  padding: 10px;
-  max-width: 640px;
-  width: 100%;
+  background: #f9f9f9;
+  margin-bottom: 15px;
+  font-size: 13px;
+  border-top: solid 5px #f07e26;
+  border-bottom: solid 2px #f07e26;
+  color: #333333;
+}
+
+.box-header {
+  border-bottom: solid 1px #e0e0e0;
+  font-family: 'Roboto Condensed', sans-serif;
+  padding: 0 15px;
+}
+
+.box-container h5 {
+  font-size: 1rem;
+  margin: 15px 0;
+}
+.box-container h3 {
+  font-size: 1.5rem;
+  margin: 15px 0;
+}
+.box-body-container {
+  color: #000000;
+
+  padding: 0 15px;
 }

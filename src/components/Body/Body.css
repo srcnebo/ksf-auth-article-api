@@ -1,0 +1,32 @@
+.article-body {
+  font-weight: 300;
+  width: 100%;
+  padding: 0 15px;
+}
+.article-body-paragraph {
+  margin: 15px 0 20px;
+  font-size: 0.95rem;
+  line-height: 22px;
+}
+.subheadline1 {
+  color: #333333;
+}
+
+@media (min-width: 480px) {
+  .article-body {
+    padding: 0;
+  }
+  .article-body-paragraph {
+    margin: 15px 0 20px;
+    font-size: 1rem;
+  }
+}
+@media (min-width: 769px) {
+  .article-body {
+    max-width: 680px;
+  }
+  .article-body-paragraph {
+    margin: 15px 0 20px;
+    font-size: 0.95rem;
+  }
+}
