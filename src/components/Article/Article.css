@@ -103,6 +103,7 @@
   .article-preamble {
     font-size: 1.25rem;
     margin: 20px 0;
+    line-height: 1.25;
     padding: 0;
   }
 }
