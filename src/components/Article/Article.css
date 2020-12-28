@@ -54,6 +54,10 @@
   width: 45%;
   max-width: 200px;
 }
+.delete-token-button {
+  background-color: #8b2424;
+  min-width: 100px;
+}
 
 .text-padding {
   padding: 0 15px;

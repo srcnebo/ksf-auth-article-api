@@ -1,39 +1,42 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { loginUser } from '../../api';
 import './Login.css';
 
-async function loginUser(username, password) {
-  const token = await axios
-    .post(
-      'https://persona.api.ksfmedia.fi/v1/login',
-      { username, password },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    )
-    .then((res) => {
-      const userToken = res.data;
-      sessionStorage.setItem('token', JSON.stringify(userToken));
-      // return userToken;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  return await token;
-}
+// async function loginUser(username, password) {
+//   const token = await axios
+//     .post(
+//       'https://persona.api.ksfmedia.fi/v1/login',
+//       { username, password },
+//       {
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//       }
+//     )
+//     .then((res) => {
+//       const userToken = res.data;
+//       sessionStorage.setItem('token', JSON.stringify(userToken));
+//       // return userToken;
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     });
+//   return await token;
+// }
 
-function Login({ getData, currentArticleId }) {
+function Login({ fetchArticleData, currentArticleId, setToken }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    const token = await loginUser(username, password);
-    getData(currentArticleId, token);
+    loginUser(username, password).then((userToken) => {
+      setToken(JSON.stringify(userToken));
+      sessionStorage.setItem('token', JSON.stringify(userToken));
+      console.log(userToken);
+      // fetchArticleData(currentArticleId);
+    });
   };
 
   return (
@@ -43,9 +46,9 @@ function Login({ getData, currentArticleId }) {
         <span className='header1-underline'>endast 1€</span>
       </h1>
 
-      <div class='login-text'>
+      <div className='login-text'>
         Redan prenumerant?
-        <span class='login-link'>Logga in för att fortsätta läsa</span>
+        <span className='login-link'>Logga in för att fortsätta läsa</span>
       </div>
 
       <div className='login-wrapper'>
@@ -78,7 +81,7 @@ function Login({ getData, currentArticleId }) {
 }
 
 Login.propTypes = {
-  getData: PropTypes.object,
+  fetchArticleData: PropTypes.func,
   currentArticleId: PropTypes.string,
 };
 

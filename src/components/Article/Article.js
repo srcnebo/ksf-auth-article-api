@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Image from '../Image/Image';
 import Login from '../Login/Login';
 import Body from '../Body/Body';
 import Metadata from '../Metadata/Metadata';
+import { fetchArticleData, getToken } from '../../api';
 import './Article.css';
 
 const articleTest = {
@@ -11,40 +11,15 @@ const articleTest = {
   free: 'a6282b95-e620-4040-87d1-731fed85a7d6',
 };
 
-const getToken = function () {
-  const tokenString = sessionStorage.getItem('token');
-  const userToken = JSON.parse(tokenString);
-  return userToken;
-};
-
 function Article() {
   const [data, setData] = useState(null);
   const [currentArticleId, setCurrentArticleId] = useState(articleTest.free);
-
-  const getData = (articleId, token = getToken()) => {
-    axios
-      .get(`https://lettera.api.ksfmedia.fi/v3/article/${articleId}`, {
-        headers: token
-          ? {
-              'Content-Type': 'application/json',
-              AuthUser: `${token?.uuid}`,
-              Authorization: `OAuth ${token?.token}`,
-            }
-          : {},
-      })
-      .then((res) => {
-        const data = res.data;
-        setData(data);
-      })
-      .catch((err) => {
-        console.log(err);
-        setData(err.response.data.not_entitled.articlePreview);
-        console.log('Preview', err.response.data.not_entitled.articlePreview);
-      });
-  };
+  const [token, setToken] = useState();
 
   useEffect(() => {
-    getData(currentArticleId);
+    fetchArticleData(currentArticleId).then((articleData) => {
+      setData(articleData);
+    });
   }, [currentArticleId]);
 
   return (
@@ -59,6 +34,11 @@ function Article() {
           className='ksf-button test-button'
           onClick={() => setCurrentArticleId(articleTest.free)}>
           Load Free Article
+        </button>
+        <button
+          className='ksf-button delete-token-button'
+          onClick={() => sessionStorage.removeItem('token')}>
+          Delete Token
         </button>
       </div>
       {data && (
@@ -97,8 +77,12 @@ function Article() {
             />
           </div>
           <Body body={data.body} />
-          {data.premium && !getToken() && (
-            <Login getData={getData} currentArticleId={currentArticleId} />
+          {data.premium && !token && (
+            <Login
+              fetchArticleData={fetchArticleData}
+              currentArticleId={currentArticleId}
+              setToken={setToken}
+            />
           )}
         </div>
       )}
